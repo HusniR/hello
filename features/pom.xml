@@ -1,0 +1,77 @@
+<project>
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>hello.features</artifactId>
+	<version>1.0</version>
+	<name>hello.features</name>
+	<packaging>jar</packaging>
+
+	<parent>
+		<groupId>com.husniroukbi</groupId>
+		<artifactId>hello</artifactId>
+		<version>1.0</version>
+	</parent>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>4.8.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>4.8.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.husniroukbi</groupId>
+			<artifactId>hello.main</artifactId>
+			<version>1.0</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+
+		<directory>target</directory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+
+		<plugins>
+
+			<!-- For story level tests -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>3.0.0-M4</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<includes>
+						<include>**/*IT.java</include>
+					</includes>
+					<environmentVariables>
+						<HELLOWORLD_CLASSPATH>
+							../main/target/hello.main-1.0.jar
+						</HELLOWORLD_CLASSPATH>
+					</environmentVariables>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+</project>
